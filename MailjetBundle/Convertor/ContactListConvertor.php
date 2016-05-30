@@ -3,7 +3,7 @@
 namespace Dekalee\MailjetBundle\Convertor;
 
 use Dekalee\MailjetBundle\Entity\ContactList;
-use Dekalee\MailjetBundle\Entity\ContactListRepository;
+use Dekalee\MailjetBundle\Repository\ContactListRepository;
 use Dekalee\MailjetBundle\Exception\ContactListNotCreated;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -32,7 +32,7 @@ class ContactListConvertor
     }
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return int
      * @throws ContactListNotCreated
@@ -55,7 +55,7 @@ class ContactListConvertor
 
         $contactList = new ContactList();
         $contactList->setName($name);
-        $contactList->setListId($response[0]['ID']);
+        $contactList->setListId($response->getData()[0]['ID']);
 
         $this->objectManager->persist($contactList);
         $this->objectManager->flush($contactList);

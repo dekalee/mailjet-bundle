@@ -2,6 +2,7 @@
 
 namespace Dekalee\MailjetBundle\Repository;
 
+use Dekalee\MailjetBundle\Entity\ContactList;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -12,4 +13,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class ContactListRepository extends EntityRepository
 {
+    /**
+     * @param $name
+     *
+     * @return ContactList
+     */
+    public function findOneByName($name)
+    {
+        return $this->findOneBy(['name' => $name]);
+    }
 }

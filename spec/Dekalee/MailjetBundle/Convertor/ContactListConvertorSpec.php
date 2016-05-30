@@ -1,11 +1,11 @@
 <?php
 
-namespace spec\Dekalee\MailjetBundle\Convetor;
+namespace spec\Dekalee\MailjetBundle\Convertor;
 
 use Dekalee\MailjetBundle\Convertor\ContactListConvertor;
 use Dekalee\MailjetBundle\Entity\ContactList;
-use Dekalee\MailjetBundle\Entity\ContactListRepository;
 use Dekalee\MailjetBundle\Exception\ContactListNotCreated;
+use Dekalee\MailjetBundle\Repository\ContactListRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Mailjet\Client;
 use Mailjet\Resources;
