@@ -1,0 +1,9 @@
+parameters:
+    dekalee_mailet.creator.contact_list.class: Dekalee\MailjetBundle\Creator\ContactListCreator
+
+services:
+    dekalee_mailet.creator.contact_list:
+        class: '%dekalee_mailet.creator.contact_list.class%'
+        arguments:
+            - '@dekalee_mailjet.convertor.contact_list'
+            - '@dekalee_mailjet.client'
