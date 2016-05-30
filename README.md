@@ -26,6 +26,14 @@ template id :
         base_template_id: %base_template_id%
 ```
 
+You will also have to modify the transport in the mailer configuration :
+
+``` yaml
+    # app/config/config.yml
+    swiftmailer:
+        transport:  mailjet
+```
+
 ## Extension
 
 In mailjet, you can define your own template for the mail you send. It is
