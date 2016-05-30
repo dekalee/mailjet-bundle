@@ -1,0 +1,27 @@
+{
+    "name": "dekalee/mailjet-bundle",
+    "description": "This bundle provides a transport for swiftmailer to send mail through mailjet",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Dekalee community",
+            "homepage": "https://github.com/dekalee/mailjet-bundle/graphs/contributors"
+        }
+    ],
+    "require": {
+        "symfony/swiftmailer-bundle": "~2.3",
+        "mailjet/mailjet-apiv3-php": "~1.1"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0",
+        "henrikbjorn/phpspec-code-coverage": "^2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Dekalee\\MailjetBundle\\": "MailjetBundle/"
+        }
+    }
+}

@@ -1,0 +1,12 @@
+parameters:
+    dekalee_mailjet.transport.mailjet_send_api.class: Dekalee\MailjetBundle\Transport\MailjetSendApiTransport
+
+services:
+    dekalee_mailjet.transport.mailjet_send_api:
+        class: '%dekalee_mailjet.transport.mailjet_send_api.class%'
+        arguments:
+            - '@dekalee_mailjet.client'
+            - '@swiftmailer.mailer.default.transport.eventdispatcher'
+            - '@dekalee_mailjet.guesser.template_id.manager'
+    swiftmailer.mailer.transport.mailjet:
+        alias: dekalee_mailjet.transport.mailjet_send_api

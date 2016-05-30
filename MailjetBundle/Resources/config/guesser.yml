@@ -1,0 +1,8 @@
+parameters:
+    dekalee_mailjet.guesser.template_id.manager.class: Dekalee\MailjetBundle\Guesser\TemplateIdGuesserManager
+
+services:
+    dekalee_mailjet.guesser.template_id.manager:
+        class: '%dekalee_mailjet.guesser.template_id.manager.class%'
+        arguments:
+            - '%dekalee_mailjet.template.fallback%'
