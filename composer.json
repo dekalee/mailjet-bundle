@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=5.5",
         "symfony/swiftmailer-bundle": "~2.3",
         "mailjet/mailjet-apiv3-php": "~1.1"
     },
