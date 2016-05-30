@@ -84,7 +84,7 @@ class MailjetSendApiTransport implements \Swift_Transport
         $from = $message->getFrom();
         $recipients = [];
 
-        foreach ($message->getTo() as $email => $name ) {
+        foreach ($message->getTo() as $email => $name) {
             $recipients[] = ['Email' => $email, 'Name' => $email];
         }
 
