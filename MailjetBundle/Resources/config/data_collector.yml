@@ -1,0 +1,10 @@
+parameters:
+    dekalee_mailjet.data_collector.mailjet.class: Dekalee\MailjetBundle\DataCollector\MailjetDataCollector
+
+services:
+    dekalee_mailjet.data_collector.mailjet:
+        class: '%dekalee_mailjet.data_collector.mailjet.class%'
+        arguments:
+            - '@dekalee_mailjet.client'
+        tags:
+            - { name: data_collector, template: DekaleeMailjetBundle:DataCollector:mailjet.html.twig, id: mailjet}

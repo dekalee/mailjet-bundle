@@ -1,0 +1,46 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <span class="icon"><img src="https://fr.mailjet.com/wp-content/uploads/logo-mailjet-asset.jpg" alt=""/></span>
+        <span class="sf-toolbar-status">{{ collector.callCount }}</span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            Mailjet {{ collector.callCount }}
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': true }) }}
+{% endblock %}
+
+{% block menu %}
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class="label">
+        <span class="icon"><img src="https://fr.mailjet.com/wp-content/uploads/logo-mailjet-asset.jpg" alt=""/></span>
+        <strong>Mailjet {{ collector.callCount }}</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    {# Optional, for showing the most details. #}
+    <h2>Mailjet queries done</h2>
+    <table>
+        <tr>
+            <th>Method</th>
+            <th>Resource</th>
+            <th>Arguments</th>
+        </tr>
+
+        {% for type,calls in collector.data %}
+            {% for call in calls %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>{{ dump(call.resource) }}</td>
+                    <td>{{ dump(call.args) }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+{% endblock %}

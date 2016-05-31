@@ -1,5 +1,5 @@
 parameters:
-    dekalee_mailjet.client.class: Mailjet\Client
+    dekalee_mailjet.client.class: Dekalee\MailjetBundle\Client\DekaleeClient
 
 services:
     dekalee_mailjet.client:
