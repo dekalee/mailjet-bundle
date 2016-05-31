@@ -1,9 +1,0 @@
-parameters:
-    dekalee_mailjet.unsubscriber.contact_list.class: Dekalee\MailjetBundle\Unsubscriber\ContactListUnsubscriber
-
-services:
-    dekalee_mailjet.unsubscriber.contact_list:
-        class: '%dekalee_mailjet.unsubscriber.contact_list.class%'
-        arguments:
-            - '@dekalee_mailjet.convertor.contact_list'
-            - '@dekalee_mailjet.client'

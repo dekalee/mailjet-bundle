@@ -1,13 +1,14 @@
 <?php
 
-namespace Dekalee\MailjetBundle\Creator;
+namespace Dekalee\MailjetBundle\Manager;
 
 use Dekalee\MailjetBundle\Convertor\ContactListConvertor;
+use Dekalee\MailjetBundle\Creator\ContactCreator;
 
 /**
- * Class ContactListCreator
+ * Class ContactListSubscriber
  */
-class ContactListCreator
+class ContactListSubscriber
 {
     protected $contactCreator;
     protected $contactListConvertor;

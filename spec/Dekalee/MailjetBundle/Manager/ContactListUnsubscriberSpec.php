@@ -1,9 +1,9 @@
 <?php
 
-namespace spec\Dekalee\MailjetBundle\Unsubscriber;
+namespace spec\Dekalee\MailjetBundle\Manager;
 
 use Dekalee\MailjetBundle\Convertor\ContactListConvertor;
-use Dekalee\MailjetBundle\Unsubscriber\ContactListUnsubscriber;
+use Dekalee\MailjetBundle\Manager\ContactListUnsubscriber;
 use Mailjet\Client;
 use Mailjet\Resources;
 use PhpSpec\ObjectBehavior;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Dekalee\MailjetBundle\Unsubscriber;
+namespace Dekalee\MailjetBundle\Manager;
 
 use Dekalee\MailjetBundle\Convertor\ContactListConvertor;
 use Mailjet\Client;
