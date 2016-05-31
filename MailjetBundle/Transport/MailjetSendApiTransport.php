@@ -90,13 +90,16 @@ class MailjetSendApiTransport implements \Swift_Transport
 
         $body = [
             'FromEmail' => key($from),
-            'FromName' => key($from),
             'Subject' => $message->getSubject(),
             'Vars' => ['content' => $message->getBody()],
             'Recipients' => $recipients,
             'MJ-TemplateID' => $this->templateIdGuesserManager->guess($message),
             'MJ-TemplateLanguage' => 'True',
         ];
+        
+        if (null !== $fromName = current($from)) {
+            $body['FromName'] = $fromName;
+        }
 
         $response = $this->client->post(Resources::$Email, ['body' => $body]);
         $success = $response->success();

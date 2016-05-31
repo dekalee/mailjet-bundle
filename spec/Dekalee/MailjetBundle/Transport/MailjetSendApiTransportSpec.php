@@ -69,7 +69,6 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
 
         $client->post(Resources::$Email, ['body' => [
             'FromEmail' => 'test@foo.com',
-            'FromName' => 'test@foo.com',
             'Subject' => 'Mail subject',
             'Vars' => ['content' => 'Mail body'],
             'Recipients' => [
@@ -108,7 +107,37 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
 
         $client->post(Resources::$Email, ['body' => [
             'FromEmail' => 'test@foo.com',
-            'FromName' => 'test@foo.com',
+            'Subject' => 'Mail subject',
+            'Vars' => ['content' => 'Mail body'],
+            'Recipients' => [
+                ['Email' => 'to@foo.com', 'Name' => 'to@foo.com'],
+                ['Email' => 'bar@baz.com', 'Name' => 'bar@baz.com'],
+            ],
+            'MJ-TemplateID' => 'foo',
+            'MJ-TemplateLanguage' => 'True',
+        ]])->shouldBeCalled();
+    }
+
+    function it_should_fill_from_name(
+        Swift_Mime_Message $message,
+        Client $client,
+        Response $response,
+        TemplateIdGuesserManager $manager
+    ) {
+        $manager->guess($message)->willReturn('foo');
+        $message->getFrom()->willReturn(['test@foo.com' => 'FooBar']);
+        $message->getTo()->willReturn(['to@foo.com' => null, 'bar@baz.com' => null]);
+        $message->getSubject()->willReturn('Mail subject');
+        $message->getBody()->willReturn('Mail body');
+
+        $response->success()->willReturn(false);
+        $client->post(Argument::any(), Argument::any())->willReturn($response);
+
+        $this->send($message)->shouldBeEqualTo(0);
+
+        $client->post(Resources::$Email, ['body' => [
+            'FromEmail' => 'test@foo.com',
+            'FromName' => 'FooBar',
             'Subject' => 'Mail subject',
             'Vars' => ['content' => 'Mail body'],
             'Recipients' => [
