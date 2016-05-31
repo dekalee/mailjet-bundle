@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ContactList
  *
- * @ORM\Table()
+ * @ORM\Table(name="mailjet_contact_list")
  * @ORM\Entity(repositoryClass="Dekalee\MailjetBundle\Repository\ContactListRepository")
  */
 class ContactList
@@ -19,22 +19,21 @@ class ContactList
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="listId", type="integer")
      */
-    private $listId;
-
+    protected $listId;
 
     /**
      * Get id
