@@ -36,6 +36,6 @@ class ContactListSubscriber
     {
         $contactListId = $this->contactListConvertor->convert($name);
         $this->contactCreator->create($name, $contact, $parameters);
-        $this->contactCreator->addToList($name, $contactListId);
+        $this->contactCreator->addToList($contactListId, $contact);
     }
 }
