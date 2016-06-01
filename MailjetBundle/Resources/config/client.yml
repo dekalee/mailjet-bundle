@@ -5,5 +5,5 @@ services:
     dekalee_mailjet.client:
         class: '%dekalee_mailjet.client.class%'
         arguments:
-            - %dekalee_mailjet.key.api%
-            - %dekalee_mailjet.key.secret%
+            - '%dekalee_mailjet.key.api%'
+            - '%dekalee_mailjet.key.secret%'

@@ -32,7 +32,7 @@ class ContactListSubscriber
      *
      * @throws \Dekalee\MailjetBundle\Exception\ContactListNotCreated
      */
-    public function addContactToList($name, $contact, array $parameters = [])
+    public function subscribe($name, $contact, array $parameters = [])
     {
         $contactListId = $this->contactListConvertor->convert($name);
         $this->contactCreator->create($name, $contact, $parameters);
