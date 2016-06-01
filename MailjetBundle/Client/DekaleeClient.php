@@ -22,9 +22,17 @@ class DekaleeClient extends Client
      */
     public function post($resource, $args = [])
     {
-        $this->calls['POST'][] = ['resource' => $resource, 'args' => $args];
+        $response = parent::post($resource, $args);
 
-        return parent::post($resource, $args);
+        $this->calls[] = [
+            'method' => 'POST',
+            'resource' => $resource,
+            'args' => $args,
+            'success' => $response->success(),
+            'response' => $response->getBody(),
+        ];
+
+        return $response;
     }
 
     /**
@@ -37,9 +45,17 @@ class DekaleeClient extends Client
      */
     public function get($resource, $args = [])
     {
-        $this->calls['GET'][] = ['resource' => $resource, 'args' => $args];
+        $response = parent::get($resource, $args);
 
-        return parent::get($resource, $args);
+        $this->calls[] = [
+            'method' => 'GET',
+            'resource' => $resource,
+            'args' => $args,
+            'success' => $response->success(),
+            'response' => $response->getBody(),
+        ];
+
+        return $response;
     }
 
     /**
@@ -52,10 +68,17 @@ class DekaleeClient extends Client
      */
     public function put($resource, $args = [])
     {
-        $this->calls['PUT'][] = ['resource' => $resource, 'args' => $args];
+        $response = parent::put($resource, $args);
 
+        $this->calls[] = [
+            'method' => 'PUT',
+            'resource' => $resource,
+            'args' => $args,
+            'success' => $response->success(),
+            'response' => $response->getBody(),
+        ];
 
-        return parent::put($resource, $args);
+        return $resource;
     }
 
     /**
@@ -68,9 +91,17 @@ class DekaleeClient extends Client
      */
     public function delete($resource, $args = [])
     {
-        $this->calls['DELETE'][] = ['resource' => $resource, 'args' => $args];
+        $response = parent::delete($resource, $args);
 
-        return parent::delete($resource, $args);
+        $this->calls[] = [
+            'method' => 'DELETE',
+            'resource' => $resource,
+            'args' => $args,
+            'success' => $response->success(),
+            'response' => $response->getBody(),
+        ];
+
+        return $response;
     }
 
     /**

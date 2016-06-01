@@ -54,12 +54,6 @@ class MailjetDataCollector extends DataCollector
 
     public function getCallCount()
     {
-        $count = 0;
-
-        foreach ($this->data as $methodCalls) {
-            $count += count($methodCalls);
-        }
-
-        return $count;
+        return count($this->data);
     }
 }

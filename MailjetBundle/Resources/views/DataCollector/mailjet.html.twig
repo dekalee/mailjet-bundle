@@ -19,7 +19,12 @@
     {# This left-hand menu appears when using the full-screen profiler. #}
     <span class="label">
         <span class="icon"><img src="https://fr.mailjet.com/wp-content/uploads/logo-mailjet-asset.jpg" alt=""/></span>
-        <strong>Mailjet {{ collector.callCount }}</strong>
+        <strong>Mailjet</strong>
+        {% if collector.callCount > 0 %}
+            <span class="count">
+                <span>{{ collector.callCount }}</span>
+            </span>
+        {% endif %}
     </span>
 {% endblock %}
 
@@ -33,14 +38,14 @@
             <th>Arguments</th>
         </tr>
 
-        {% for type,calls in collector.data %}
-            {% for call in calls %}
-                <tr>
-                    <td>{{ type }}</td>
-                    <td>{{ dump(call.resource) }}</td>
-                    <td>{{ dump(call.args) }}</td>
-                </tr>
-            {% endfor %}
+        {% for call in collector.data %}
+            <tr {% if (false == call.success) %}class="status-warning"{% endif %}>
+                <td>{{ call.method }}</td>
+                <td>{{ dump(call.resource) }}</td>
+                <td>{{ dump(call.args) }}</td>
+                <td>{{ dump(call.success) }}</td>
+                <td>{{ dump(call.response) }}</td>
+            </tr>
         {% endfor %}
     </table>
 {% endblock %}

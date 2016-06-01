@@ -45,7 +45,7 @@ class ContactCreator
                 $this->client->post(Resources::$Contactmetadata, ['body' => $body]);
                 $data['Data'][] = [
                     'Name' => $item . "_" . $name,
-                    'value' => $parameters[$item]
+                    'value' => substr($parameters[$item], 0, 1000),
                 ];
             }
         }
