@@ -27,11 +27,9 @@ class ContactListUnsubscriberSpec extends ObjectBehavior
 
         $this->unsubscribe('list_name', 'foo@bar.com');
 
-        $client->post(Resources::$ContactManagecontactslists, ['id' => 'foo@bar.com', 'body' => [
-            'ContactsLists' => [
-                'ListId' => 10,
-                'Action' => 'unsub',
-            ],
+        $client->post(Resources::$ContactslistManagecontact, ['id' => 10, 'body' => [
+            'Action' => 'unsub',
+            'Email' => 'foo@bar.com',
         ]])->shouldBeCalled();
     }
 }
