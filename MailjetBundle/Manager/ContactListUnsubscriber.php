@@ -31,11 +31,9 @@ class ContactListUnsubscriber
     public function unsubscribe($listName, $contact)
     {
         $contactListId = $this->convertor->convert($listName);
-        $this->client->post(Resources::$ContactManagecontactslists, ['id' => $contact, 'body' => [
-            'ContactsLists' => [
-                'ListId' => $contactListId,
-                'Action' => 'unsub',
-            ],
+        $this->client->post(Resources::$ContactslistManagecontact, ['id' => $contactListId, 'body' => [
+            'Action' => 'unsub',
+            'Email' => $contact,
         ]]);
     }
 }
