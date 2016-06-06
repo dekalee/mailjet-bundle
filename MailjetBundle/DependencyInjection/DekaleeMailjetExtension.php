@@ -30,5 +30,10 @@ class DekaleeMailjetExtension extends Extension
         $loader->load('client.yml');
         $loader->load('transport.yml');
         $loader->load('guesser.yml');
+        $loader->load('creator.yml');
+        $loader->load('convertor.yml');
+        $loader->load('repository.yml');
+        $loader->load('manager.yml');
+        $loader->load('data_collector.yml');
     }
 }

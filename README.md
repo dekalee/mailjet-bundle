@@ -56,3 +56,59 @@ There are two methods inside :
 
 Once your class is created, you should add the tag `dekalee_mailjet.guesser.template_id.strategy`
 to your service definition
+
+## Campaign management
+
+### Affiliate a user to a campaign
+
+To affiliate a contact to a campaign, you should use the `ContactListSubscriber` class,
+declared under the `dekalee_mailet.subscriber.contact_list` key in the container:
+
+``` php
+    class RegisterUser
+    {
+        protected $subscriber;
+
+        public function __construct(ContactListSubscriber $subscriber)
+        {
+            $this->subscriber = $subscriber;
+        }
+
+        public function addUser(User $user)
+        {
+            $this->subscriber->subscribe(
+                'campaignName',
+                $user->getEmail(),
+                [
+                    'subject' => 'Mail subject (linked to the user)',
+                    'content' => 'Mail content (linked to the user)',
+                ]
+            );
+        }
+    }
+```
+
+The template used for sending personnal emails to the contact from this list would be
+able to use the variable `content_CampaignName` and `subject_CampaignName`.
+
+### Unsubscribe a user from a campaign
+
+To affiliate a contact to a campaign, you should use the `ContactListUnSubscriber` class,
+declared under the `dekalee_mailet.unsubscriber.contact_list` key in the container:
+
+``` php
+    class UnRegisterUser
+    {
+        protected $unsubscriber;
+
+        public function __construct(ContactListUnsubscriber $unsubscriber)
+        {
+            $this->unsubscriber = $unsubscriber;
+        }
+
+        public function delUser(User $user)
+        {
+            $this->unsubscriber->unsubscribe('campaignName', $user->getEmail());
+        }
+    }
+```

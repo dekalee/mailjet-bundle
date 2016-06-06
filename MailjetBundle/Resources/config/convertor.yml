@@ -1,0 +1,10 @@
+parameters:
+    dekalee_mailjet.convertor.contact_list.class: Dekalee\MailjetBundle\Convertor\ContactListConvertor
+
+services:
+    dekalee_mailjet.convertor.contact_list:
+        class: '%dekalee_mailjet.convertor.contact_list.class%'
+        arguments:
+            - '@dekalee_mailjet.repository.contact_list'
+            - '@doctrine.orm.local_entity_manager'
+            - '@dekalee_mailjet.client'
