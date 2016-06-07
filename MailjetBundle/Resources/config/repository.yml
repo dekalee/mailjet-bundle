@@ -5,6 +5,6 @@ parameters:
 services:
     dekalee_mailjet.repository.contact_list:
         class: '%dekalee_mailjet.repository.contact_list.class%'
-        factory: ['@doctrine.orm.local_entity_manager', getRepository]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         arguments:
             - '%dekalee_mailjet.entity.contact_list.class%'

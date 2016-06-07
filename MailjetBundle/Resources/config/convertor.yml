@@ -6,5 +6,5 @@ services:
         class: '%dekalee_mailjet.convertor.contact_list.class%'
         arguments:
             - '@dekalee_mailjet.repository.contact_list'
-            - '@doctrine.orm.local_entity_manager'
+            - '@doctrine.orm.entity_manager'
             - '@dekalee_mailjet.client'
