@@ -83,9 +83,14 @@ class MailjetSendApiTransport implements \Swift_Transport
 
         $from = $message->getFrom();
         $recipients = [];
+        $headers = [];
 
         foreach ($message->getTo() as $email => $name) {
             $recipients[] = ['Email' => $email, 'Name' => $email];
+        }
+
+        foreach ($message->getHeaders()->getAll() as $header) {
+            $headers[$header->getFieldName()] = $header->getFieldBody();
         }
 
         $body = [
@@ -95,6 +100,7 @@ class MailjetSendApiTransport implements \Swift_Transport
             'Recipients' => $recipients,
             'MJ-TemplateID' => $this->templateIdGuesserManager->guess($message),
             'MJ-TemplateLanguage' => 'True',
+            'Headers' => $headers,
         ];
         
         if (null !== $fromName = current($from)) {
