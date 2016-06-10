@@ -48,13 +48,17 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         Response $response,
         TemplateIdGuesserManager $manager,
         \Swift_Events_EventDispatcher $dispatcher,
-        \Swift_Events_SendEvent $event
+        \Swift_Events_SendEvent $event,
+        \Swift_Mime_SimpleHeaderSet $headers
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => null]);
         $message->getTo()->willReturn(['to@foo.com' => null, 'bar@baz.com' => null]);
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
+        $message->getHeaders()->willReturn($headers);
+        
+        $headers->getAll()->willReturn([]);
 
         $response->success()->willReturn(true);
         $client->post(Argument::any(), Argument::any())->willReturn($response);
@@ -77,6 +81,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
+            'Headers' => [],
         ]])->shouldBeCalled();
     }
 
@@ -86,13 +91,17 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         Response $response,
         TemplateIdGuesserManager $manager,
         \Swift_Events_EventDispatcher $dispatcher,
-        \Swift_Events_SendEvent $event
+        \Swift_Events_SendEvent $event,
+        \Swift_Mime_SimpleHeaderSet $headers
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => null]);
         $message->getTo()->willReturn(['to@foo.com' => null, 'bar@baz.com' => null]);
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
+        $message->getHeaders()->willReturn($headers);
+        
+        $headers->getAll()->willReturn([]);
 
         $response->success()->willReturn(false);
         $client->post(Argument::any(), Argument::any())->willReturn($response);
@@ -115,6 +124,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
+            'Headers' => [],
         ]])->shouldBeCalled();
     }
 
@@ -122,13 +132,17 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         Swift_Mime_Message $message,
         Client $client,
         Response $response,
-        TemplateIdGuesserManager $manager
+        TemplateIdGuesserManager $manager,
+        \Swift_Mime_SimpleHeaderSet $headers
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => 'FooBar']);
         $message->getTo()->willReturn(['to@foo.com' => null, 'bar@baz.com' => null]);
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
+        $message->getHeaders()->willReturn($headers);
+        
+        $headers->getAll()->willReturn([]);
 
         $response->success()->willReturn(false);
         $client->post(Argument::any(), Argument::any())->willReturn($response);
@@ -146,6 +160,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
+            'Headers' => [],
         ]])->shouldBeCalled();
     }
 
