@@ -49,7 +49,8 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         TemplateIdGuesserManager $manager,
         \Swift_Events_EventDispatcher $dispatcher,
         \Swift_Events_SendEvent $event,
-        \Swift_Mime_SimpleHeaderSet $headers
+        \Swift_Mime_SimpleHeaderSet $headers,
+        \Swift_Attachment $attachment
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => null]);
@@ -57,6 +58,11 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
         $message->getHeaders()->willReturn($headers);
+        $message->getChildren()->willReturn([$attachment]);
+
+        $attachment->getFilename()->willReturn('foo.bar');
+        $attachment->getContentType()->willReturn('application/bar');
+        $attachment->getBody()->willReturn('baz');
         
         $headers->getAll()->willReturn([]);
 
@@ -82,6 +88,13 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
             'Headers' => [],
+            'Attachments' => [
+                [
+                    'Content-type' => 'application/bar',
+                    'Filename' => 'foo.bar',
+                    'content' => base64_encode('baz')
+                ],
+            ],
         ]])->shouldBeCalled();
     }
 
@@ -100,6 +113,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
         $message->getHeaders()->willReturn($headers);
+        $message->getChildren()->willReturn([]);
         
         $headers->getAll()->willReturn([]);
 
@@ -141,6 +155,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         $message->getSubject()->willReturn('Mail subject');
         $message->getBody()->willReturn('Mail body');
         $message->getHeaders()->willReturn($headers);
+        $message->getChildren()->willReturn([]);
         
         $headers->getAll()->willReturn([]);
 

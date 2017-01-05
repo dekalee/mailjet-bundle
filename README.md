@@ -112,3 +112,8 @@ declared under the `dekalee_mailet.unsubscriber.contact_list` key in the contain
         }
     }
 ```
+
+## Limitation
+
+For the moment, the bundle does not supports the inline attachement functionnality from mailjet,
+but contributions are welcome :).
