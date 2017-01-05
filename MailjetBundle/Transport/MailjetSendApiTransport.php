@@ -107,6 +107,16 @@ class MailjetSendApiTransport implements \Swift_Transport
             $body['FromName'] = $fromName;
         }
 
+        foreach ($message->getChildren() as $child) {
+            if ($child instanceof \Swift_Attachment) {
+                $body['Attachments'][] = [
+                    'Content-type' => $child->getContentType(),
+                    'Filename' => $child->getFilename(),
+                    'content' => base64_encode($child->getBody())
+                ];
+            }
+        }
+
         $response = $this->client->post(Resources::$Email, ['body' => $body]);
         $success = $response->success();
 
