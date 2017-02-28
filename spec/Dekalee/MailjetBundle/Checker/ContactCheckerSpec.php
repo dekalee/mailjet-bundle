@@ -22,8 +22,7 @@ class ContactCheckerSpec extends ObjectBehavior
     function it_should_check_if_there_are_no_blocked_email(
         Client $client,
         Response $response
-    )
-    {
+    ) {
         $response->success()->willReturn(true);
         $response->getBody()->willReturn([
             'Data' => [
@@ -42,8 +41,7 @@ class ContactCheckerSpec extends ObjectBehavior
     function it_should_check_if_there_are_blocked_email(
         Client $client,
         Response $response
-    )
-    {
+    ) {
         $response->success()->willReturn(true);
         $response->getBody()->willReturn([
             'Data' => [
@@ -62,8 +60,7 @@ class ContactCheckerSpec extends ObjectBehavior
     function it_should_return_error_if_success_false(
         Client $client,
         Response $response
-    )
-    {
+    ) {
         $response->success()->willReturn(false);
         $client->get(['contactstatistics', 'foo@test.co'])
             ->willReturn($response)
