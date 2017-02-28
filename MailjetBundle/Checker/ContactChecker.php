@@ -5,7 +5,7 @@ namespace Dekalee\MailjetBundle\Checker;
 use Mailjet\Client;
 
 /**
- * Class ContactChecker
+ * Class ContactChecker.
  */
 class ContactChecker
 {
@@ -24,15 +24,21 @@ class ContactChecker
      *
      * @param $email
      *
-     * @return bool
+     * @return mixed
      */
     public function hasNoBlockedEmail($email)
     {
         $response = $this->client->get(['contactstatistics', $email]);
-        $blockedCount = $response->getBody();
-        if ($response->success() && $blockedCount['Data'][0]['BlockedCount']) {
-            return false;
+        if (!$response) {
+            return 'error';
+        } else {
+            $blockedCount = $response->getBody();
+            if ($response->success() && $blockedCount['Data'][0]['BlockedCount']) {
+
+                return false;
+            }
+
+            return true;
         }
-        return true;
     }
 }

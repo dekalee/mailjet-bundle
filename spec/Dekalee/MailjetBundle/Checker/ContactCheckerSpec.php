@@ -3,9 +3,8 @@
 namespace spec\Dekalee\MailjetBundle\Checker;
 
 use Dekalee\MailjetBundle\Checker\ContactChecker;
-use Mailjet\Client;
-use Mailjet\Resources;
 use PhpSpec\ObjectBehavior;
+use Mailjet\Client;
 
 class ContactCheckerSpec extends ObjectBehavior
 {
@@ -21,7 +20,10 @@ class ContactCheckerSpec extends ObjectBehavior
 
     function it_should_check_if_there_are_no_blocked_email(Client $client)
     {
-        $return = $this->hasNoBlockedEmail('foo@test.com')->shouldBeCalled();
-        $return->shouldBeEqualTo(0);
+        $this->hasNoBlockedEmail('admin@adback.co');
+
+        $client->get(['contactstatistics', 'admin@adback.co'])
+            ->shouldBeCalled()
+        ;
     }
 }
