@@ -20,8 +20,6 @@ class ContactChecker
     }
 
     /**
-     * hasNoBlockedEmail
-     *
      * @param $email
      *
      * @return mixed
@@ -31,13 +29,12 @@ class ContactChecker
         $response = $this->client->get(['contactstatistics', $email]);
         if (!$response->success()) {
             return 'error';
-        } else {
-            $blockedCount = $response->getBody();
-            if ($blockedCount['Data'][0]['BlockedCount']) {
-                return false;
-            }
-
-            return true;
         }
+        $blockedCount = $response->getBody();
+        if ($blockedCount['Data'][0]['BlockedCount']) {
+            return false;
+        }
+
+        return true;
     }
 }
