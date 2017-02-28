@@ -29,12 +29,11 @@ class ContactChecker
     public function hasNoBlockedEmail($email)
     {
         $response = $this->client->get(['contactstatistics', $email]);
-        if (!$response) {
+        if (!$response->success()) {
             return 'error';
         } else {
             $blockedCount = $response->getBody();
-            if ($response->success() && $blockedCount['Data'][0]['BlockedCount']) {
-
+            if ($blockedCount['Data'][0]['BlockedCount']) {
                 return false;
             }
 
