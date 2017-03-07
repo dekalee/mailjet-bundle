@@ -162,6 +162,61 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         ]])->shouldBeCalled();
     }
 
+    function it_should_send_mail_with_no_multipart_data(
+        Swift_Mime_SimpleMessage $message,
+        Client $client,
+        Response $response,
+        TemplateIdGuesserManager $manager,
+        \Swift_Events_EventDispatcher $dispatcher,
+        \Swift_Events_SendEvent $event,
+        \Swift_Mime_SimpleHeaderSet $headers,
+        \Swift_Attachment $attachment
+    ) {
+        $manager->guess($message)->willReturn('foo');
+        $message->getFrom()->willReturn(['test@foo.com' => null]);
+        $message->getTo()->willReturn(['to@foo.com' => null, 'bar@baz.com' => null]);
+        $message->getSubject()->willReturn('Mail subject');
+        $message->getBody()->willReturn('Mail body');
+        $message->getHeaders()->willReturn($headers);
+        $message->getChildren()->willReturn([$attachment]);
+
+        $attachment->getFilename()->willReturn('foo.bar');
+        $attachment->getContentType()->willReturn('multipart/alternative');
+        $attachment->getBody()->willReturn('baz');
+
+        $headers->getAll()->willReturn([]);
+
+        $response->success()->willReturn(true);
+        $client->post(Argument::any(), Argument::any())->willReturn($response);
+
+        $dispatcher->createSendEvent(Argument::any(), Argument::any())->willReturn($event);
+        $dispatcher->dispatchEvent($event, 'beforeSendPerformed')->shouldBeCalled();
+        $event->bubbleCancelled()->willReturn(false);
+        $event->setResult(\Swift_Events_SendEvent::RESULT_SUCCESS)->shouldBeCalled();
+        $dispatcher->dispatchEvent($event, 'sendPerformed')->shouldBeCalled();
+
+        $this->send($message)->shouldBeEqualTo(2);
+
+        $client->post(Resources::$Email, ['body' => [
+            'FromEmail' => 'test@foo.com',
+            'Subject' => 'Mail subject',
+            'Vars' => ['content' => 'Mail body'],
+            'Recipients' => [
+                ['Email' => 'to@foo.com', 'Name' => 'to@foo.com'],
+                ['Email' => 'bar@baz.com', 'Name' => 'bar@baz.com'],
+            ],
+            'MJ-TemplateID' => 'foo',
+            'MJ-TemplateLanguage' => 'True',
+            'Headers' => [],
+            'Attachments' => [
+                [
+                    'Filename' => 'foo.bar',
+                    'content' => base64_encode('baz')
+                ],
+            ],
+        ]])->shouldBeCalled();
+    }
+
     function it_should_send_mail_and_dispatch_failed_message(
         Swift_Mime_SimpleMessage $message,
         Client $client,
