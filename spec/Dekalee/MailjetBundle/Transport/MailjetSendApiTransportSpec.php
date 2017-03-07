@@ -51,7 +51,8 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         \Swift_Events_EventDispatcher $dispatcher,
         \Swift_Events_SendEvent $event,
         \Swift_Mime_SimpleHeaderSet $headers,
-        \Swift_Attachment $attachment
+        \Swift_Attachment $attachment,
+        \Swift_Mime_Header $mailHeader
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => null]);
@@ -64,8 +65,10 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         $attachment->getFilename()->willReturn('foo.bar');
         $attachment->getContentType()->willReturn('application/bar');
         $attachment->getBody()->willReturn('baz');
-        
-        $headers->getAll()->willReturn([]);
+
+        $mailHeader->getFieldName()->willReturn('Content-Type');
+        $mailHeader->getFieldBody()->willReturn('application/bar');
+        $headers->getAll()->willReturn([$mailHeader]);
 
         $response->success()->willReturn(true);
         $client->post(Argument::any(), Argument::any())->willReturn($response);
@@ -91,6 +94,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             'Headers' => [
                 'MJ-TemplateErrorReporting' => 'foo@bar.com',
                 'MJ-TemplateErrorDeliver' => 'deliver',
+                'Content-Type' => 'application/bar',
             ],
             'Attachments' => [
                 [
@@ -170,7 +174,8 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         \Swift_Events_EventDispatcher $dispatcher,
         \Swift_Events_SendEvent $event,
         \Swift_Mime_SimpleHeaderSet $headers,
-        \Swift_Attachment $attachment
+        \Swift_Attachment $attachment,
+        \Swift_Mime_Header $mailHeader
     ) {
         $manager->guess($message)->willReturn('foo');
         $message->getFrom()->willReturn(['test@foo.com' => null]);
@@ -184,6 +189,8 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         $attachment->getContentType()->willReturn('multipart/alternative');
         $attachment->getBody()->willReturn('baz');
 
+        $mailHeader->getFieldName()->willReturn('Content-Type');
+        $mailHeader->getFieldBody()->willReturn('multipart/alternative');
         $headers->getAll()->willReturn([]);
 
         $response->success()->willReturn(true);
@@ -207,9 +214,13 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
-            'Headers' => [],
+            'Headers' => [
+                'MJ-TemplateErrorReporting' => 'foo@bar.com',
+                'MJ-TemplateErrorDeliver' => 'deliver',
+            ],
             'Attachments' => [
                 [
+                    'Content-type' => 'multipart/alternative',
                     'Filename' => 'foo.bar',
                     'content' => base64_encode('baz')
                 ],
