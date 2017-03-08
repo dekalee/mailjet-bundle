@@ -113,9 +113,7 @@ class MailjetSendApiTransport implements \Swift_Transport
             $vars = $message->getVars();
         }
 
-        if (array_key_exists('Content-Type', $headers) && false !== strpos('multipart', $headers['Content-Type'])) {
-            unset($headers['Content-Type']);
-        }
+        unset($headers['Content-Type']);
 
         $body = [
             'FromEmail' => key($from),

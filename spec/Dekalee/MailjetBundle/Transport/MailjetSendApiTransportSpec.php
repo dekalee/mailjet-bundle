@@ -94,7 +94,6 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             'Headers' => [
                 'MJ-TemplateErrorReporting' => 'foo@bar.com',
                 'MJ-TemplateErrorDeliver' => 'deliver',
-                'Content-Type' => 'application/bar',
             ],
             'Attachments' => [
                 [
