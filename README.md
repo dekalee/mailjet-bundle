@@ -1,11 +1,11 @@
 #Mailjet Bundle
 
-| Service | Badge |
-| -------- |:--------:|
-| Total Downloads | [![Total Downloads](https://poser.pugx.org/dekalee/mailjet-bundle/downloads)](https://packagist.org/packages/dekalee/mailjet-bundle) |
-| Code quality (scrutinizer) | [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master) |
-| Code coverage (scrutinizer) | [![Code Coverage](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master) |
-| Build (scrutinizer) | [![Build Status](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/build-status/master) |
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/dekalee/mailjet-bundle/v/stable)](https://packagist.org/packages/dekalee/mailjet-bundle)
+[![Total Downloads](https://poser.pugx.org/dekalee/mailjet-bundle/downloads)](https://packagist.org/packages/dekalee/mailjet-bundle)
+[![License](https://poser.pugx.org/dekalee/mailjet-bundle/license)](https://packagist.org/packages/dekalee/mailjet-bundle)
 
 ## Usage
 
