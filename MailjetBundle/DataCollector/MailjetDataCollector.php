@@ -56,4 +56,12 @@ class MailjetDataCollector extends DataCollector
     {
         return count($this->data);
     }
+
+    /**
+     * Reset the collector to initial state
+     */
+    public function reset()
+    {
+        $this->data = array();
+    }
 }
