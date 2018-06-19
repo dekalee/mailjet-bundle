@@ -6,7 +6,7 @@ use Dekalee\MailjetBundle\Guesser\TemplateIdGuesserManager;
 use Mailjet\Client;
 use Mailjet\Resources;
 use Swift_Events_EventListener;
-use Swift_Mime_Message;
+use Swift_Mime_SimpleMessage;
 
 /**
  * Class MailjetSendApiTransport
@@ -65,12 +65,12 @@ class MailjetSendApiTransport implements \Swift_Transport
      * Recipient/sender data will be retrieved from the Message API.
      * The return value is the number of recipients who were accepted for delivery.
      *
-     * @param Swift_Mime_Message $message
-     * @param string[]           $failedRecipients An array of failures by-reference
+     * @param Swift_Mime_SimpleMessage $message
+     * @param string[]                 $failedRecipients An array of failures by-reference
      *
      * @return int
      */
-    public function send(Swift_Mime_Message $message, &$failedRecipients = null)
+    public function send(Swift_Mime_SimpleMessage $message, &$failedRecipients = null)
     {
         $failedRecipients = (array) $failedRecipients;
 
@@ -140,5 +140,13 @@ class MailjetSendApiTransport implements \Swift_Transport
     public function registerPlugin(Swift_Events_EventListener $plugin)
     {
         $this->dispatcher->bindEventListener($plugin);
+    }
+
+    /**
+     * @return bool
+     */
+    public function ping()
+    {
+        return true;
     }
 }
