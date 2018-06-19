@@ -1,8 +1,13 @@
 {
     "name": "dekalee/mailjet-bundle",
     "description": "This bundle provides a transport for swiftmailer to send mail through mailjet",
-    "license": "Apache-2.0",
+    "type": "symfony-bundle",
+    "license": "MIT",
     "authors": [
+        {
+            "name": "Nicolas Thal",
+            "email": "nico.th4l@gmail.com"
+        },
         {
             "name": "Dekalee community",
             "homepage": "https://github.com/dekalee/mailjet-bundle/graphs/contributors"
