@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=5.5",
-        "symfony/swiftmailer-bundle": "~2.3",
+        "symfony/swiftmailer-bundle": "~2.3|~3.2",
         "mailjet/mailjet-apiv3-php": "~1.2",
         "doctrine/orm": "^2.3.6"
     },
