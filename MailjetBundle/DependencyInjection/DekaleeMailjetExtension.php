@@ -6,6 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -31,9 +32,12 @@ class DekaleeMailjetExtension extends Extension
         $loader->load('transport.yml');
         $loader->load('guesser.yml');
         $loader->load('creator.yml');
-        $loader->load('convertor.yml');
-        $loader->load('repository.yml');
-        $loader->load('manager.yml');
         $loader->load('data_collector.yml');
+
+        if (4 === Kernel::MAJOR_VERSION || array_key_exists('DoctrineBundle', $container->getParameter('kernel.bundles'))) {
+            $loader->load('convertor.yml');
+            $loader->load('repository.yml');
+            $loader->load('manager.yml');
+        }
     }
 }

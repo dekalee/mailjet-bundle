@@ -23,6 +23,9 @@
         "phpspec/phpspec": "~2.0",
         "henrikbjorn/phpspec-code-coverage": "^2.0"
     },
+    "suggest": {
+        "doctrine/doctrine-bundle": "To use the list functionnality"
+    },
     "config": {
         "bin-dir": "bin"
     },
