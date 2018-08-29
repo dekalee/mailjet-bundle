@@ -1,6 +1,6 @@
 <?php
 
-namespace Dekalee\Message;
+namespace Dekalee\MailjetBundle\Message;
 
 use Swift_Message;
 

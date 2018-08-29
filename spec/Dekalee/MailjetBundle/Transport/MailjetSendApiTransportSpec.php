@@ -4,7 +4,7 @@ namespace spec\Dekalee\MailjetBundle\Transport;
 
 use Dekalee\MailjetBundle\Guesser\TemplateIdGuesserManager;
 use Dekalee\MailjetBundle\Transport\MailjetSendApiTransport;
-use Dekalee\Message\SwiftCustomVarsMessage;
+use Dekalee\MailjetBundle\Message\SwiftCustomVarsMessage;
 use Mailjet\Client;
 use Mailjet\Resources;
 use Mailjet\Response;
