@@ -46,4 +46,12 @@ class SwiftCustomVarsMessage extends Swift_Message
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getBody()
+    {
+        return json_encode($this->vars);
+    }
 }

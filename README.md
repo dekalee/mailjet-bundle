@@ -2,7 +2,7 @@
 
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dekalee/mailjet-bundle/build-status/master)
+[![Build Status](https://travis-ci.org/dekalee/mailjet-bundle.svg?branch=master)](https://travis-ci.org/dekalee/mailjet-bundle)
 [![Latest Stable Version](https://poser.pugx.org/dekalee/mailjet-bundle/v/stable)](https://packagist.org/packages/dekalee/mailjet-bundle)
 [![Total Downloads](https://poser.pugx.org/dekalee/mailjet-bundle/downloads)](https://packagist.org/packages/dekalee/mailjet-bundle)
 [![License](https://poser.pugx.org/dekalee/mailjet-bundle/license)](https://packagist.org/packages/dekalee/mailjet-bundle)
@@ -112,6 +112,39 @@ declared under the `dekalee_mailet.unsubscriber.contact_list` key in the contain
         }
     }
 ```
+
+## Custom template
+
+If you want to use a custom template from mailjet with some custom variables, there is a way to do it in the bundle:
+
+- Create a custom message
+
+```php
+    namespace Bar;
+
+    use Dekalee\MailjetBundle\Message\SwiftCustomVarsMessage;
+
+    class FooMessage extends SwiftCustomVarsMessage {}
+```
+
+- Fill the vars property with the parameters you want to send
+
+```php
+    $message = new FooMessage();
+
+    $message->setVars(['bar' => 'baz']);
+```
+
+- Configure the simple message guesser to use your template
+```yaml
+    dekalee_mailjet:
+        simple_template_choice:
+            Bar\FooMessage: 1
+```
+
+If you send the mail throught mailjet, the template 1 will be used.
+
+In your working environment, you will receive a mail with all the vars json encoded.
 
 ## Limitation
 
