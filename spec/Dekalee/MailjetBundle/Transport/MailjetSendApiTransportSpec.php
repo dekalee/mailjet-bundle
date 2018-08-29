@@ -10,7 +10,7 @@ use Mailjet\Resources;
 use Mailjet\Response;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Swift_Mime_Message;
+use Swift_Mime_SimpleMessage;
 
 class MailjetSendApiTransportSpec extends ObjectBehavior
 {
@@ -44,7 +44,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
     }
     
     function it_should_send_mail(
-        Swift_Mime_Message $message,
+        Swift_Mime_SimpleMessage $message,
         Client $client,
         Response $response,
         TemplateIdGuesserManager $manager,
@@ -157,7 +157,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
     }
 
     function it_should_send_mail_and_dispatch_failed_message(
-        Swift_Mime_Message $message,
+        Swift_Mime_SimpleMessage $message,
         Client $client,
         Response $response,
         TemplateIdGuesserManager $manager,
@@ -201,7 +201,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
     }
 
     function it_should_fill_from_name(
-        Swift_Mime_Message $message,
+        Swift_Mime_SimpleMessage $message,
         Client $client,
         Response $response,
         TemplateIdGuesserManager $manager,
@@ -238,7 +238,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
     }
 
     function it_should_not_send_mail_if_cancelled(
-        Swift_Mime_Message $message,
+        Swift_Mime_SimpleMessage $message,
         Client $client,
         \Swift_Events_EventDispatcher $dispatcher,
         \Swift_Events_SendEvent $event

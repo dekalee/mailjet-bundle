@@ -23,13 +23,13 @@ class SimpleTemplateGuesserSpec extends ObjectBehavior
         $this->shouldHaveType(TemplateIdGuesserInterface::CLASS);
     }
 
-    function it_should_support_foo_class_only(\Swift_Mime_Message $message, foo $foo)
+    function it_should_support_foo_class_only(\Swift_Mime_SimpleMessage $message, foo $foo)
     {
         $this->supports($message)->shouldBeEqualTo(false);
         $this->supports($foo)->shouldBeEqualTo(true);
     }
 
-    function it_should_return_template_id(\Swift_Mime_Message $message)
+    function it_should_return_template_id(\Swift_Mime_SimpleMessage $message)
     {
         $this->guess($message)->shouldBeEqualTo(1);
     }
