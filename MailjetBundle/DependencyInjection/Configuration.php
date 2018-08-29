@@ -24,6 +24,11 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('api_key')->isRequired()->info('Mailjet API key')->end()
             ->scalarNode('secret_key')->isRequired()->info('Mailjet API token')->end()
             ->scalarNode('base_template_id')->isRequired()->info('Mailjet fallback template')->end()
+            ->arrayNode('simple_template_choice')
+                ->useAttributeAsKey('message_class')
+                ->prototype('integer')
+                ->end()
+            ->end()
         ->end();
 
         return $treeBuilder;

@@ -3,6 +3,7 @@
 namespace Dekalee\MailjetBundle\Transport;
 
 use Dekalee\MailjetBundle\Guesser\TemplateIdGuesserManager;
+use Dekalee\MailjetBundle\Message\SwiftCustomVarsMessage;
 use Mailjet\Client;
 use Mailjet\Resources;
 use Swift_Events_EventListener;
@@ -93,10 +94,15 @@ class MailjetSendApiTransport implements \Swift_Transport
             $headers[$header->getFieldName()] = $header->getFieldBody();
         }
 
+        $vars = ['content' => $message->getBody()];
+        if ($message instanceof SwiftCustomVarsMessage) {
+            $vars = $message->getVars();
+        }
+
         $body = [
             'FromEmail' => key($from),
             'Subject' => $message->getSubject(),
-            'Vars' => ['content' => $message->getBody()],
+            'Vars' => $vars,
             'Recipients' => $recipients,
             'MJ-TemplateID' => $this->templateIdGuesserManager->guess($message),
             'MJ-TemplateLanguage' => 'True',
