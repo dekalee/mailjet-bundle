@@ -3,7 +3,7 @@
 namespace Dekalee\MailjetBundle\Guesser\Strategy;
 
 use Dekalee\MailjetBundle\Guesser\TemplateIdGuesserInterface;
-use Swift_Mime_Message;
+use Swift_Mime_SimpleMessage;
 
 /**
  * Class SimpleTemplateGuesser
@@ -24,21 +24,21 @@ class SimpleTemplateGuesser implements TemplateIdGuesserInterface
     }
 
     /**
-     * @param Swift_Mime_Message $message
+     * @param Swift_Mime_SimpleMessage $message
      *
      * @return bool|void
      */
-    public function supports(Swift_Mime_Message $message)
+    public function supports(Swift_Mime_SimpleMessage $message)
     {
         return $message instanceof $this->class;
     }
 
     /**
-     * @param Swift_Mime_Message $message
+     * @param Swift_Mime_SimpleMessage $message
      *
      * @return int|string
      */
-    public function guess(Swift_Mime_Message $message)
+    public function guess(Swift_Mime_SimpleMessage $message)
     {
         return $this->templateId;
     }

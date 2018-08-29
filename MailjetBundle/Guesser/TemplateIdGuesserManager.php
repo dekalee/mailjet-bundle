@@ -2,7 +2,7 @@
 
 namespace Dekalee\MailjetBundle\Guesser;
 
-use Swift_Mime_Message;
+use Swift_Mime_SimpleMessage;
 
 /**
  * Class TemplateIdGuesserManager
@@ -21,11 +21,11 @@ class TemplateIdGuesserManager
     }
 
     /**
-     * @param Swift_Mime_Message $message
+     * @param Swift_Mime_SimpleMessage $message
      *
      * @return string|int|null
      */
-    public function guess(Swift_Mime_Message $message)
+    public function guess(Swift_Mime_SimpleMessage $message)
     {
         /** @var TemplateIdGuesserInterface $guesser */
         foreach ($this->guessers as $guesser) {
