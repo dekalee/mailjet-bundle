@@ -84,7 +84,7 @@ class DekaleeClient extends Client
             'response' => $response->getBody(),
         ];
 
-        return $resource;
+        return $response;
     }
 
     /**
