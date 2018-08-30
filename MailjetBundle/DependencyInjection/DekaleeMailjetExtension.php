@@ -44,8 +44,10 @@ class DekaleeMailjetExtension extends Extension
         foreach ($config['simple_template_choice'] as $class => $templateId) {
             $container
                 ->register('dekalee.mailjet.simple_choice.' . $class, SimpleTemplateGuesser::CLASS)
-                ->setArgument('class', $class)
-                ->setArgument('templateId', $templateId)
+                ->setArguments([
+                    $class,
+                    $templateId
+                ])
                 ->addTag('dekalee_mailjet.guesser.template_id.strategy');
         }
     }
