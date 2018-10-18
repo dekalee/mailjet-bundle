@@ -29,6 +29,8 @@ class Configuration implements ConfigurationInterface
                 ->prototype('integer')
                 ->end()
             ->end()
+            ->scalarNode('reporting_email')->defaultNull()->info('Email where the error reporting should be send')->end()
+            ->booleanNode('force_deliver')->defaultFalse()->info('If the email should be force delivered if there is a syntax error')
         ->end();
 
         return $treeBuilder;

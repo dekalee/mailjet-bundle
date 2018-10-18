@@ -146,6 +146,22 @@ If you send the mail throught mailjet, the template 1 will be used.
 
 In your working environment, you will receive a mail with all the vars json encoded.
 
+## Debug
+
+Since version 2.1.0, it is possible to use mailjet debug capabilities.
+
+You can directly configure them in the config file:
+
+```yaml
+    dekalee_mailjet:
+        reporting_email: foo@bar.com
+        force_deliver: true
+```
+
+The `reporting_email` parameter will be used to send the error report mail.
+
+The `force_deliver` parameter will force the mail deliver even if there is a syntax issue.
+
 ## Limitation
 
 For the moment, the bundle does not supports the inline attachement functionnality from mailjet,

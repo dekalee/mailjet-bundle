@@ -16,6 +16,8 @@ class MailjetSendApiTransport implements \Swift_Transport
 {
     protected $client;
     protected $dispatcher;
+    protected $forceDeliver;
+    protected $reportingEmail;
     protected $started = true;
     protected $templateIdGuesserManager;
 
@@ -23,14 +25,20 @@ class MailjetSendApiTransport implements \Swift_Transport
      * @param Client                        $client
      * @param \Swift_Events_EventDispatcher $dispatcher
      * @param TemplateIdGuesserManager      $templateIdGuesserManager
+     * @param null|string                   $reportingEmail
+     * @param bool                          $forceDeliver
      */
     public function __construct(
         Client $client,
         \Swift_Events_EventDispatcher $dispatcher,
-        TemplateIdGuesserManager $templateIdGuesserManager
+        TemplateIdGuesserManager $templateIdGuesserManager,
+        $reportingEmail = null,
+        $forceDeliver = false
     ) {
         $this->client = $client;
         $this->dispatcher = $dispatcher;
+        $this->forceDeliver = $forceDeliver;
+        $this->reportingEmail = $reportingEmail;
         $this->templateIdGuesserManager = $templateIdGuesserManager;
     }
 
@@ -92,6 +100,12 @@ class MailjetSendApiTransport implements \Swift_Transport
 
         foreach ($message->getHeaders()->getAll() as $header) {
             $headers[$header->getFieldName()] = $header->getFieldBody();
+        }
+        if (null !== $this->reportingEmail) {
+            $headers['MJ-TemplateErrorReporting'] = $this->reportingEmail;
+        }
+        if ($this->forceDeliver) {
+            $headers['MJ-TemplateErrorDeliver'] = 'deliver';
         }
 
         $vars = ['content' => $message->getBody()];

@@ -27,6 +27,8 @@ class DekaleeMailjetExtension extends Extension
         $container->setParameter('dekalee_mailjet.key.api', $config['api_key']);
         $container->setParameter('dekalee_mailjet.key.secret', $config['secret_key']);
         $container->setParameter('dekalee_mailjet.template.fallback', $config['base_template_id']);
+        $container->setParameter('dekalee_mailjet.debug.reporting_email', $config['reporting_email']);
+        $container->setParameter('dekalee_mailjet.debug.force_deliver', $config['force_deliver']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('client.yml');
