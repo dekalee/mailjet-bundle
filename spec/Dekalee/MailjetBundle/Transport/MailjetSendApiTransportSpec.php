@@ -19,7 +19,7 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
         \Swift_Events_EventDispatcher $dispatcher,
         TemplateIdGuesserManager $manager
     ) {
-        $this->beConstructedWith($client, $dispatcher, $manager);
+        $this->beConstructedWith($client, $dispatcher, $manager, 'foo@bar.com', true);
     }
 
     function it_is_initializable()
@@ -88,7 +88,10 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
-            'Headers' => [],
+            'Headers' => [
+                'MJ-TemplateErrorReporting' => 'foo@bar.com',
+                'MJ-TemplateErrorDeliver' => 'deliver',
+            ],
             'Attachments' => [
                 [
                     'Content-type' => 'application/bar',
@@ -145,7 +148,10 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
-            'Headers' => [],
+            'Headers' => [
+                'MJ-TemplateErrorReporting' => 'foo@bar.com',
+                'MJ-TemplateErrorDeliver' => 'deliver',
+            ],
             'Attachments' => [
                 [
                     'Content-type' => 'application/bar',
@@ -196,7 +202,10 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
-            'Headers' => [],
+            'Headers' => [
+                'MJ-TemplateErrorReporting' => 'foo@bar.com',
+                'MJ-TemplateErrorDeliver' => 'deliver',
+            ],
         ]])->shouldBeCalled();
     }
 
@@ -233,7 +242,10 @@ class MailjetSendApiTransportSpec extends ObjectBehavior
             ],
             'MJ-TemplateID' => 'foo',
             'MJ-TemplateLanguage' => 'True',
-            'Headers' => [],
+            'Headers' => [
+                'MJ-TemplateErrorReporting' => 'foo@bar.com',
+                'MJ-TemplateErrorDeliver' => 'deliver',
+            ],
         ]])->shouldBeCalled();
     }
 
