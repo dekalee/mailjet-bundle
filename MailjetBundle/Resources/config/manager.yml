@@ -13,3 +13,8 @@ services:
         arguments:
             - '@dekalee_mailjet.convertor.contact_list'
             - '@dekalee_mailjet.client'
+
+    Dekalee\MailjetBundle\Manager\ContactListSubscriber:
+        alias: dekalee_mailet.subscriber.contact_list
+    Dekalee\MailjetBundle\Manager\ContactListUnsubscriber:
+        alias: dekalee_mailjet.unsubscriber.contact_list
