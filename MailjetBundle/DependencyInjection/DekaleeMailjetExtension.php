@@ -3,6 +3,7 @@
 namespace Dekalee\MailjetBundle\DependencyInjection;
 
 use Dekalee\MailjetBundle\Guesser\Strategy\SimpleTemplateGuesser;
+use Dekalee\MailjetBundle\Guesser\TemplateIdGuesserInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -41,6 +42,9 @@ class DekaleeMailjetExtension extends Extension
             $loader->load('convertor.yml');
             $loader->load('repository.yml');
             $loader->load('manager.yml');
+        }
+        if (3 < Kernel::MAJOR_VERSION || (3 === Kernel::MAJOR_VERSION && 3 <= Kernel::MINOR_VERSION)) {
+            $container->registerForAutoconfiguration(TemplateIdGuesserInterface::CLASS)->addTag('dekalee_mailjet.guesser.template_id.strategy');
         }
 
         foreach ($config['simple_template_choice'] as $class => $templateId) {
