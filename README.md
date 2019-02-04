@@ -166,3 +166,8 @@ The `force_deliver` parameter will force the mail deliver even if there is a syn
 
 For the moment, the bundle does not supports the inline attachement functionnality from mailjet,
 but contributions are welcome :).
+
+## Warning for symfony4
+
+When used with env parameters, the swiftmailer bundle automatically generates the transport by using
+a factory. To avoid this workflow, you shall not use env parameters to configure your swiftmailer installation.
